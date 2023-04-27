@@ -16,4 +16,13 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtil {
 
+  @Value("$(jwt.secret)")
+  String jwtSecret;
+  public String getJWTToken(String username){
+    return Jwts.builder()
+    .signWith(SignatureAlgorithm.HS256, jwtSecret)
+    .setPayload(username)
+    .compact();
+  }
+
 }

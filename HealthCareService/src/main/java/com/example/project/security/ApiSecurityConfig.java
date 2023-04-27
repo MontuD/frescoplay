@@ -24,6 +24,18 @@ import com.example.project.service.UserAuthService;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ApiSecurityConfig  {
+public class ApiSecurityConfig extends WebSecurityConfigurerAdapter  {
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.cors().disable();
+    http.csrf().disable();
+    http.authorizeRequests().antMatchers("/register","/signin").permitAll().anyRequest().authenticated();
+    http.sessionManagement( (sessionManagement)->{
+      sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    });
+  }
+
+  
 	
 }

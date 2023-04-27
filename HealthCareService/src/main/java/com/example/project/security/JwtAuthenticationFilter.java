@@ -19,6 +19,14 @@ import com.example.project.service.UserAuthService;
 
 
 @Component
-public class JwtAuthenticationFilter  {
+public class JwtAuthenticationFilter   extends OncePerRequestFilter{
+
+  @Override
+  protected void doFilterInternal(HttpServletRequest arg0, HttpServletResponse arg1, FilterChain arg2)
+      throws ServletException, IOException {
+        arg2.doFilter(arg0, arg1);
+  }
+
+
 
 }
