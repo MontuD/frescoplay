@@ -25,15 +25,23 @@ import com.example.project.service.UserAuthService;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter  {
+  
+  @Autowired
+  JwtAuthenticationFilter authenticationFilter;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().disable();
     http.csrf().disable();
-    http.authorizeRequests().antMatchers("/register","/signin").permitAll().anyRequest().authenticated();
+    http.authorizeRequests().antMatchers("/register","/signin")
+    .permitAll().anyRequest().authenticated();
     http.sessionManagement( (sessionManagement)->{
       sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     });
+
+    http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+
   }
 
   

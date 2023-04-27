@@ -46,6 +46,10 @@ public class ApplicationUserService {
     }
     return hashmap;  
   }
+
+  public ApplicationUser findById(String userId){
+    return this.applicationUserRepository.findById(userId).get();
+  }
   
   
   public HashMap<String,Object> signin(ApplicationUser applicationUser){
