@@ -5,60 +5,73 @@
       <h2 >LOGIN</h2>
     </div>
     <div class="login-form-wrapper" >
-      <form class="ro-form">
-        <div class="form-group">
+      <form class="ro-form" name="login" [formGroup]="loginForm" (ngSubmit)="doLogin()">
+        <div class="form-group" >
           <label class="labelHead" for="username">
             <b>Username</b>
           </label>
-          <input type="text" id="username" placeholder="username">
 
-          <div class="form-error-messages"
-            id="error-no-username">
-            {{emptyUserName}}
-          </div>
-          <div class="form-error-messages"
-            id="error-minlength-username">
-            {{minlengthUserName}}
-          </div>
-          <div class="form-error-messages"
-            id="error-maxlength-username">
-            {{maxlengthUserName}}
-          </div>
-          <div class="form-error-messages"
-            id="error-pattern-username">
-            {{userNamePattern}}
-          </div>
+          <input type="text" id="username"  formControlName="username" placeholder="username">
+
+          <div *ngIf="getUsername.invalid && (getUsername.dirty || getUsername.touched)">
+
+            <div class="form-error-messages"
+              id="error-no-username" *ngIf="getUsername?.errors['required']">
+              {{emptyUserName}}
+            </div>
+            <div class="form-error-messages"
+              id="error-minlength-username" *ngIf="getUsername?.errors['minlength']">
+              {{minlengthUserName}}
+            </div>
+            <div class="form-error-messages"
+              id="error-maxlength-username" *ngIf="getUsername?.errors['maxlength']">
+              {{maxlengthUserName}}
+            </div>
+            <div class="form-error-messages"
+              id="error-pattern-username"
+              *ngIf="getUsername?.errors['pattern']">
+              {{userNamePattern}}
+            </div>
+        </div>
+
         </div>
         <div class="form-group">
           <label class="labelHead" for="password">
             <b>Password</b>
           </label>
-          <input type="password" id="password" placeholder="password">
+          <input type="password" id="password"  formControlName="password" placeholder="password" >
+          <div *ngIf="getPassword.invalid && (getPassword.touched || getPassword.dirty)" >
           <div class="form-error-messages"
-            id="error-no-password">
+            id="error-no-password"  *ngIf="getPassword?.errors['required']">
             {{emptyPassword}}
           </div>
           <div class="form-error-messages"
-            id="error-minlength-password">
+            id="error-minlength-password" *ngIf="getPassword?.errors['minlength']" >
             {{minlengthPassword}}
           </div>
           <div class="form-error-messages"
-            id="error-maxlength-password">
+            id="error-maxlength-password"  *ngIf="getPassword?.errors['maxlength']">
             {{maxlengthPassword}}
           </div>
-          <div class="form-error-messages" 
-            id="error-pattern-password">
+          <div class="form-error-messages"
+            id="error-pattern-password" *ngIf="getPassword?.errors['pattern']">
             {{passwordPattern}}
           </div>
         </div>
+
+        </div>
+
         <div class="col-sm-12 clmn12">
           <!-- disable button if form not valid -->
           <!-- call doLogin method when clicking on this button-->
-          <button id="loginBtn" class="login-btn" type="submit" >Login</button>
+          <button id="loginBtn" class="login-btn" type="submit" (click)="doLogin()" >Login</button>
           <!-- call signUp method when clicking on this button-->
-          <button id="signupBtn" class="guest-btn">Sign up</button>
+          <button id="signupBtn" class="guest-btn" (click)="signUp()">Sign up</button>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+
+

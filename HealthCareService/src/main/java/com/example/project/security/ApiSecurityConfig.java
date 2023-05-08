@@ -33,8 +33,9 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter  {
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().disable();
     http.csrf().disable();
-    http.authorizeRequests().antMatchers("/register","/signin")
-    .permitAll().anyRequest().authenticated();
+    http.authorizeRequests().antMatchers("/register","/signin","/actuator/*","/h2-console/*").permitAll().anyRequest().authenticated();
+   
+   
     http.sessionManagement( (sessionManagement)->{
       sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     });

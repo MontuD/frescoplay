@@ -26,11 +26,18 @@ export class DataService {
     // store 'id' from response as key name 'id' to the localstorage
     // store 'token' from response as key name 'token' to the localstorage
 
+    this.api.checkLogin(user_name,password).subscribe((response)=>{
+      console.log(response);
+    });
+
     // return true if user authenticated
 
-    // return false if user not authenticated 
+    // return false if user not authenticated
 
-    return;
+
+
+
+    return ;
   }
 
   getAuthStatus(): Observable<boolean> {
@@ -42,7 +49,7 @@ export class DataService {
   regNewUser(regNewUser): Observable<any> {
     // should return response retrieved from ApiService
 
-    // handle error 
+    // handle error
 
     return;
   }
@@ -60,7 +67,7 @@ export class DataService {
   updateProfile(userId:string, userDetails): Observable<boolean> {
     // should return response retrieved from ApiService
 
-    // handle error 
+    // handle error
 
     return;
   }
@@ -68,7 +75,7 @@ export class DataService {
   registerPatient(patientDetails): Observable<any> {
     // should return response retrieved from ApiService
 
-    // handle error 
+    // handle error
 
     return;
   }
@@ -76,7 +83,7 @@ export class DataService {
   getAllPatientsList(): Observable<any> {
     // should return all patients from server
 
-    // handle error 
+    // handle error
 
     return;
   }
@@ -84,15 +91,15 @@ export class DataService {
   getParticularPatient(id): Observable<any> {
     // should return particular patient details from server
 
-    // handle error 
+    // handle error
 
     return;
   }
-  
+
   diseasesList(): Observable<any> {
     // should return diseases from server
 
-    // handle error 
+    // handle error
 
     return;
   }
@@ -100,7 +107,7 @@ export class DataService {
   scheduleAppointment(appointmentDetails): Observable<any> {
     // should return response from server if appointment booked successfully
 
-    // handle error 
+    // handle error
 
     return;
   }
@@ -108,7 +115,7 @@ export class DataService {
   getSinglePatientAppointments(patientId): Observable<any> {
     // should return appointments of particular patient from server
 
-    // handle error 
+    // handle error
 
     return;
   }
@@ -124,7 +131,7 @@ export class DataService {
   requestedAppointments(): Observable<any> {
     // should return all requested appointments from server
 
-    // handle error 
+    // handle error
 
     return;
   }

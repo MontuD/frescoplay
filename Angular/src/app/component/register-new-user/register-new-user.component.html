@@ -4,50 +4,54 @@
       <h2 >SIGN UP</h2>
     </div>
     <div class="login-form-wrapper" >
-      <form class="ro-form">
+      <form class="ro-form" name="signup" [formGroup]="signupForm" (ngSubmit)="signUp()" >
         <div class="form-group">
           <label class="labelHead" for="username">
             <b>Username</b>
           </label>
-          <input type="text" id="username" placeholder="username">
+          <input type="text" formControlName="username" id="username" placeholder="username"  >
 
-          <div class="form-error-messages"
-            id="error-no-username">
-            {{emptyUserName}}
-          </div>
-          <div class="form-error-messages"
-            id="error-minlength-username">
-            {{minlengthUserName}}
-          </div>
-          <div class="form-error-messages"
-            id="error-maxlength-username">
-            {{maxlengthUserName}}
-          </div>
-          <div class="form-error-messages"
-            id="error-pattern-username">
-            {{userNamePattern}}
-          </div>
+          <div *ngIf="getUsername.invalid && (getUsername.dirty || getUsername.touched)">
+            <div class="form-error-messages"
+              id="error-no-username" *ngIf="getUsername?.errors['required']" >
+              {{emptyUserName}}
+            </div>
+            <div class="form-error-messages"
+              id="error-minlength-username" *ngIf="getUsername?.errors['minlength']">
+              {{minlengthUserName}}
+            </div>
+            <div class="form-error-messages"
+              id="error-maxlength-username" *ngIf="getUsername?.errors['maxlength']" >
+              {{maxlengthUserName}}
+            </div>
+            <div class="form-error-messages"
+              id="error-pattern-username" >
+              {{userNamePattern}}
+            </div>
+            </div>
         </div>
         <div class="form-group">
           <label class="labelHead" for="password">
             <b>Password</b>
           </label>
-          <input type="password" id="password" placeholder="password">
-          <div class="form-error-messages"
-            id="error-no-password">
-            {{emptyPassword}}
-          </div>
-          <div class="form-error-messages"
-            id="error-minlength-password">
-            {{minlengthPassword}}
-          </div>
-          <div class="form-error-messages"
-            id="error-maxlength-password">
-            {{maxlengthPassword}}
-          </div>
-          <div class="form-error-messages"
-            id="error-pattern-password">
-            {{passwordPattern}}
+          <input type="password"  formControlName="password" id="password" placeholder="password" >
+          <div *ngIf="getPassword.invalid && (getPassword.touched || getPassword.dirty)">
+            <div class="form-error-messages"
+              id="error-no-password" *ngIf="getPassword?.errors['required']">
+              {{emptyPassword}}
+            </div>
+            <div class="form-error-messages"
+              id="error-minlength-password" *ngIf="getPassword?.errors['minlength']" >
+              {{minlengthPassword}}
+            </div>
+            <div class="form-error-messages"
+              id="error-maxlength-password"  *ngIf="getPassword?.errors['maxlength']">
+              {{maxlengthPassword}}
+            </div>
+            <div class="form-error-messages"
+              id="error-pattern-password" *ngIf="getPassword?.errors['pattern']">
+              {{passwordPattern}}
+            </div>
           </div>
         </div>
 
@@ -55,35 +59,49 @@
           <label class="labelHead" for="mobile">
             Contact number
           </label>
-          <input type="number" value="" id="mobile" placeholder="mobile number">
-          <div id="error-mobile" class="form-error-messages" >
+          <input type="text"  id="mobile" placeholder="mobile number"  formControlName="mobile">
+
+        <div *ngIf="getMobile.invalid && (getMobile.dirty || getMobile.touched)">
+          <div id="error-mobile" class="form-error-messages" *ngIf="getMobile?.errors['required']"  >
+            {{mobileErrMsg}}
+          </div>
+          <div id="error-mobile" class="form-error-messages" *ngIf="getMobile?.errors['minlength']"  >
+            {{mobileErrMsg}}
+          </div>
+          <div id="error-mobile" class="form-error-messages" *ngIf="getMobile?.errors['maxlength']"  >
             {{mobileErrMsg}}
           </div>
         </div>
+      </div>
 
         <div class="form-group">
           <label class="labelHead" for="email">
             Email
           </label>
-          <input type="email" value="" id="email" placeholder="Email">
-          <div id="error-email" class="form-error-messages">
+          <input type="email" value="" id="email" placeholder="Email" formControlName="email">
+        <div *ngIf="getEmail.invalid && (getEmail.touched || getEmail.dirty)">
+          <div id="error-email" class="form-error-messages" *ngIf="getEmail?.errors['required']">
             {{emailErrMsg}}
           </div>
         </div>
+      </div>
 
         <div class="form-group">
           <label class="labelHead" for="location">
             Location
           </label>
-          <input type="text" value="" id="location" placeholder="Location">
-          <div id="error-location" class="form-error-messages">
+          <input type="text" value="" id="location" placeholder="Location" formControlName="location">
+        <div *ngIf="getLocation.invalid && (getLocation.dirty || getLocation.touched)">
+          <div id="error-location" class="form-error-messages" *ngIf="getLocation?.errors['required']" >
             {{locationErrMsg}}
           </div>
+
         </div>
 
+      </div>
         <div class="col-sm-12 clmn12">
           <!-- call goBack method when clicking on this button-->
-          <button id="back" class="guest-btn">Back</button>
+          <button id="back" class="guest-btn" (click)="goBack()">Back</button>
           <!-- disable button if form not valid -->
           <!-- call signUp method when clicking on this button-->
           <button id="signup" class="login-btn" type="submit">Create Account</button>
@@ -93,3 +111,5 @@
     </div>
   </div>
 </div>
+
+
